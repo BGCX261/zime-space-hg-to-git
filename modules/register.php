@@ -1,25 +1,16 @@
 <?php
-// @(#) $Id$
-// +-----------------------------------------------------------------------+
-// | Copyright (C) 2008, http://yoursite                                   |
-// +-----------------------------------------------------------------------+
-// | This file is free software; you can redistribute it and/or modify     |
-// | it under the terms of the GNU General Public License as published by  |
-// | the Free Software Foundation; either version 2 of the License, or     |
-// | (at your option) any later version.                                   |
-// | This file is distributed in the hope that it will be useful           |
-// | but WITHOUT ANY WARRANTY; without even the implied warranty of        |
-// | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the          |
-// | GNU General Public License for more details.                          |
-// +-----------------------------------------------------------------------+
-// | Author: pFa                                                           |
-// +-----------------------------------------------------------------------+
-//
+/**
+* @version		$Id: register.php 10001 2011-01-11 15:40:00 @strazds $
+* @package		ZIME.Framework
+* @subpackage	Modules
+* @copyright	Copyright (C) 1999 - 2011 by ZIME Foundation. All rights reserved.
+* @license		http://www.zime.lv/license
+*/
 ?>
 
 <?php
 // no direct access
-defined( '_JEXEC' ) or die( 'Access restricted' );
+defined( '_ZEXEC' ) or die( 'Access restricted' );
 
 include_once("libraries/email.php");
 include_once("libraries/cipher.php");
@@ -29,11 +20,23 @@ include_once("modules/settings.php");
 include_once("modules/user.php");
 include_once("modules/collection.php");
 
+/**
+ * User registration class
+ *
+ * @static
+ * @package 	ZIME.Framework
+ * @subpackage	Modules
+ * @since		3.0
+ */
 class ZRegister {	
 	
 	/**
-	Register dialog
-	*/
+	 * Shows the user registration dialog.
+	 *
+	 * @access	public
+	 * @since	3.0
+	 *
+	 */
 	function register_dialog() {
 		global $_POST, $CONFIG, $SANITIZER, $SecureSession;
 		$str_error = ''; // init
@@ -161,11 +164,13 @@ class ZRegister {
 		echo "<br />";
 	}
 	
-	
-	
 	/**
-	Register action
-	*/
+	 * Performs a new user registration.
+	 *
+	 * @access	public
+	 * @since	3.0
+	 *
+	 */
 	function register_action() {
 		global $_POST, $CONFIG, $SANITIZER, $SecureSession;
 		$str_error = ''; // init
@@ -329,8 +334,12 @@ class ZRegister {
 	}
 	
 	/**
-	Join ZIME dialog
-	*/
+	 * Shows the 'Join ZIME' dialog.
+	 *
+	 * @access	public
+	 * @since	3.0
+	 *
+	 */
 	function join_dialog() {
 		//echo "<div class='slot' style='display:block; width:120px;'>";
 		echo "<br />";
@@ -359,8 +368,13 @@ class ZRegister {
 	}
 	
 	/**
-	Integrity test: Username
-	**/
+	 * Performs the user name integrity test.
+	 *
+	 * @access	public
+	 * @param	string $un The user name
+	 * @since	3.0
+	 *
+	 */
 	function test_integrity_username($un) {
 		$str_error = ""; // init
 		
@@ -440,8 +454,13 @@ class ZRegister {
 	}
 	
 	/**
-	Integrity test: Email
-	**/
+	 * Performs the email address integrity test.
+	 *
+	 * @access	public
+	 * @param	string $email The email address
+	 * @since	3.0
+	 *
+	 */
 	function test_integrity_email($email) {
 		$email_validation_required = true;
 		$str_error = ""; // init
@@ -485,9 +504,14 @@ class ZRegister {
 		return $str_error;
 	}
 	
-	/** 
-		Extracts firstname, lastname from full name 
-	**/
+	/**
+	 * Extracts firstname, lastname from full name .
+	 *
+	 * @access	public
+	 * @param	string $fullname The user full name
+	 * @since	3.0
+	 *
+	 */
 	function extract_fullname_parts($fullname) {
 		$fullname_array = explode(" ", $fullname, 2);
 		if (is_array($fullname_array) && (count($fullname_array) == 2)) {
@@ -499,7 +523,6 @@ class ZRegister {
 		}
 		return array($firstname, $lastname);
 	}
-	
 }
 ?>
 
