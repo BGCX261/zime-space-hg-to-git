@@ -1,25 +1,35 @@
 <?php
-// @(#) $Id$
-// +-----------------------------------------------------------------------+
-// | Copyright (C) 2008, http://yoursite                                   |
-// +-----------------------------------------------------------------------+
-// | This file is free software; you can redistribute it and/or modify     |
-// | it under the terms of the GNU General Public License as published by  |
-// | the Free Software Foundation; either version 2 of the License, or     |
-// | (at your option) any later version.                                   |
-// | This file is distributed in the hope that it will be useful           |
-// | but WITHOUT ANY WARRANTY; without even the implied warranty of        |
-// | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the          |
-// | GNU General Public License for more details.                          |
-// +-----------------------------------------------------------------------+
-// | Author: pFa                                                           |
-// +-----------------------------------------------------------------------+
-//
+/**
+* @version		$Id: help.php 10001 2011-01-11 15:51:00 @strazds $
+* @package		ZIME.Framework
+* @subpackage	Modules
+* @copyright	Copyright (C) 1999 - 2011 by ZIME Foundation. All rights reserved.
+* @license		http://www.zime.lv/license
+*/
 ?>
 
 <?php 
+// no direct access
+defined( '_ZEXEC' ) or die( 'Access restricted' );
+
 include_once("modules/url.php");
+
+/**
+ * ZIME Help class
+ *
+ * @static
+ * @package 	ZIME.Framework
+ * @subpackage	Modules
+ * @since		3.0
+ */
 class ZHelp {
+	/**
+	 * Shows the help dialog.
+	 *
+	 * @access	public
+	 * @since	3.0
+	 *
+	 */
 	function show() {
 		global $_GET, $_SESSION, $SANITIZER;
 		$menu_item = $SANITIZER->sanitize(@$_GET["t"]);
@@ -49,6 +59,14 @@ class ZHelp {
 		}
 	}
 	
+	/**
+	 * Shows the help menu.
+	 *
+	 * @access	private
+	 * @param	string $active_item The pre-selected menu item (optional)
+	 * @since	3.0
+	 *
+	 */
 	function menu($active_item = "") {
 		$menu_items = array(
 			"help" => "Help"
@@ -75,10 +93,25 @@ class ZHelp {
 		echo "<br />";
 	}
 	
+	/**
+	 * Shows a link to the context sensitive help topic.
+	 *
+	 * @access	private
+	 * @param	string $context_id The identifier of the help topic
+	 * @since	3.0
+	 *
+	 */
 	function context_link($context_id) { 
 		return "<sup><small><a href='" . ZUrl::modify(array('help' => $context_id)) . "'>?</a></small></sup>";
 	}
 	
+	/**
+	 * Shows the help topic.
+	 *
+	 * @access	private
+	 * @since	3.0
+	 *
+	 */
 	function help_dialog() { 
 		/* */
 		echo "<div class='' id='help-topic' style='display:block;'>";
@@ -87,7 +120,6 @@ class ZHelp {
 			echo "<table width='650'><tr><td>";
 			echo $content;
 			echo "</td></tr></table>";
-			//echo '<input class="button" type="submit" name="confirm_delete" id="confirm_delete" onclick="form.action=\'settings\?t=deleted\'" value="' . JText::_("Deactivate account") . '" />';
 		echo "</div>";
 	}
 }
