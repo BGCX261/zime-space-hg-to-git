@@ -9,6 +9,10 @@
 ?>
 
 <?php
+
+// no direct access
+defined( '_ZEXEC' ) or die( 'Access restricted' );
+
 /**
  * URL modification class
  *
